@@ -1,0 +1,8 @@
+{include file='header.html'}
+
+<h1><a href="{spUrl('link', 'add')}">Add Links</a></h1>
+{foreach $links as $link}
+	<p><a href="{$link['address']}" target="_black">{$link['title']}</a>	<small><i>{$link['address']}</i></small></p>
+{/foreach}
+
+{include file='footer.html'}

@@ -1,0 +1,11 @@
+{include file="header.html"}
+
+<h1>SignUp</h1>
+
+<form action="{spUrl('user', 'signup_post')}" method="POST">
+	<p>UserName:<input type="text" name="username" size="25" /><br /></p>
+	<p>Password:<input type="text" name="password" size="25" /><br /></p>
+	<p>E-Mail:<input type="email" name="email" size="25" /></p>
+	<input type="submit" value="SignUp" />
+</form>
+{include file="footer.html"}

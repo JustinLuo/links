@@ -1,5 +1,13 @@
 {include file='header.html'}
 
+{if ($smarty.session.user != NULL)}
+	Welcome! {$smarty.session.user.username} | <a href="{spUrl('user', 'logout')}">Logout</a>
+{else}
+	<a href="{spUrl('user', 'signin')}">SignIn</a>|<a href="{spUrl('user', 'signup')}">SignUp</a>
+{/if}
+
+
+
 <h1><a href="{spUrl('link', 'add')}">Add Links</a></h1>
 {foreach $links as $link}
 	<p><a href="{$link['address']}" target="_black">{$link['title']}</a>	<small><i>{$link['address']}</i></small></p>

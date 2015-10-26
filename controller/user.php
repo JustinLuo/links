@@ -8,6 +8,7 @@ class user extends spController{
 
 
 	public function signin_post(){
+		dump($this->spArgs());
 		$user = spClass('Users')->find(['email'	=>	$this->spArgs('email'),
 										'password'	=>	$this->spArgs('password')]);
 		if ($user != NULL){

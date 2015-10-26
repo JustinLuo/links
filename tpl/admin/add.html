@@ -1,11 +1,11 @@
 {include file='header.html'}
-
-<form action="{spUrl('admin', 'add_post')}" method="POST">
-	<p>Title:</p>
-	<input type="text" name="title" size="25" /><br />
-	<p>address</p>
-	<input type="text" name="address" size="25" /><br />
-	<input type="submit" value="Add" />
-</form>
-
+<div class="container-fluid">
+	<form action="{spUrl('admin', 'add_post')}" method="POST">
+		<p>Title:</p>
+		<input type="text" name="title" size="25" /><br />
+		<p>address</p>
+		<input type="text" name="address" size="25" /><br />
+		<input type="submit" value="Add" />
+	</form>
+</div>
 {include file='footer.html'}

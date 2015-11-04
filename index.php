@@ -2,7 +2,14 @@
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",dirname(__FILE__).'/SpeedPHP');
 $spConfig = array(
+	// 'db'	=>	array(
+	// 	'host'	=>	'localhost',
+	// 	'login'	=>	'root',
+	// 	'password'	=>	'123456',
+	// 	'database'	=>	'blog',
+	// 	),
 	'db'	=>	array(
+		'driver'	=>	'mysqli',
 		'host'	=>	'localhost',
 		'login'	=>	'root',
 		'password'	=>	'123456',
@@ -20,5 +27,6 @@ $spConfig = array(
 		),
 );
 require(SP_PATH."/SpeedPHP.php");
+import(APP_PATH.'/include/functions.php');
 
 spRun();

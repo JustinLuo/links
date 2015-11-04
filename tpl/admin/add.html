@@ -1,11 +1,90 @@
-{include file='header.html'}
-<div class="container-fluid">
-	<form action="{spUrl('admin', 'add_post')}" method="POST">
-		<p>Title:</p>
-		<input type="text" name="title" size="25" /><br />
-		<p>address</p>
-		<input type="text" name="address" size="25" /><br />
-		<input type="submit" value="Add" />
-	</form>
+{include file="header.html"}
+
+<script type="text/javascript">
+	$("document").ready(function(){
+		var status = 0;
+		$("#address").blur(function(){
+			$.getJSON("{spUrl c=admin a=checkURL}", {literal}{'address': $("#address").val()}{/literal}, function(urlJSON){
+				$("#checkURL").html("");
+				status = urlJSON.status;
+				if (urlJSON.status != 0){
+					$("#checkURL").html(urlJSON.message);
+					$("#title").attr("value", "");	
+				} else {
+					$("#title").attr("value", urlJSON.message);
+				}
+			});
+		});
+
+		$("#submit").click(function(){
+			if (status == 0){
+				var strUrl = $("#address").val();
+				var strTitle = $("#title").val();
+
+				$.ajax({
+					type: "POST",
+					url:  "{spUrl c=admin a=add_ajax}",
+					cache: false,
+					dataType: "json",
+					{literal}
+						data: {url: strUrl, title: strTitle},
+					{/literal}
+					success: function(data){
+						if (data.msg == "true"){
+							// alert("OK!");
+							$("#clsShow").html("<font color='green'>OK</font>")
+							// window.location.reload();
+						} else {
+							// alert("ERROR!");
+							alert(data.msg);
+						}
+					},
+					error: function(){
+						alert("EZRROR");
+					}
+				});
+
+				// $.getJSON("{spUrl c=admin a=add}", {literal}{'url': strUrl, 'title': strTitle}{/literal},
+				// 	function(addJson){
+				// 		if (addJson.status == 0){
+				// 			$("#clsShow").html("OK!");
+				// 		} else {
+				// 			$("#clsShow").html("NO");
+				// 		}
+				// 	});
+			}else{
+				alert("have error!");
+			}
+		});
+	});
+
+
+</script>
+<p></p>
+
+<div class="clsShow"></div>
+
+<div class="container">
+	<div class="well">
+		<h1 class="text-center">Add Links</h1>
+		<!-- <form action="{spUrl('user', 'signin_post')}" method="POST" class="form-group"> -->
+		<!-- <form role="form"> -->
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="URL" aria-describedby="basic-addon1" name="address" size=100 id="address"/></p>
+			</div>
+			<p id="checkURL"></p>
+			
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Title" aria-describedby="basic-addon2" name="title" size=100 id="title" /></p>
+			</div>
+			<p class="checkTitle"></p>
+
+			<div class="input-group">
+				<!-- <input type="submit" class="btn btn-primary" value="SignIn" /></p> -->
+				<button id="submit" class="btn btn-default">Add</button>
+			</div>
+		<!-- </form> -->
+	</div>
+
 </div>
-{include file='footer.html'}
+{include file="footer.html"}

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2015-10-26 04:32:32
+<?php /* Smarty version Smarty-3.0.8, created on 2015-11-02 17:30:26
          compiled from "/srv/http/links/tpl/index.html" */ ?>
-<?php /*%%SmartyHeaderCode:676205645562dace0171608-41270060%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:173778162656379db219d575-70001584%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '081301400e7b5428042d36c099b11331d97e127b' => 
     array (
       0 => '/srv/http/links/tpl/index.html',
-      1 => 1445833950,
+      1 => 1446485424,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '676205645562dace0171608-41270060',
+  'nocache_hash' => '173778162656379db219d575-70001584',
   'function' => 
   array (
   ),
@@ -20,7 +20,8 @@ $_smarty_tpl->decodeProperties(array (
 <?php $_template = new Smarty_Internal_Template('header.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
  echo $_template->getRenderedTemplate(); $_template->rendered_content = null;?><?php unset($_template);?>
 
-<div class="container-fluid">
+<p></p>
+<div class="container">
 	<?php if (($_SESSION['user']!=null)){?>
 		Welcome! <?php echo $_SESSION['user']['username'];?>
  | <a href="<?php echo spUrl('user','logout');?>
@@ -34,7 +35,7 @@ $_smarty_tpl->decodeProperties(array (
 
 
 	<p><a href="<?php echo spUrl('admin','add');?>
-" class="btn btn-primary">Add Links</a></p>
+" class="btn btn-default">Add Links</a></p>
 	<!-- <h1><a href="<?php echo spUrl('admin','add');?>
 ">Add Links</a></h1> -->
 	<?php  $_smarty_tpl->tpl_vars['link'] = new Smarty_Variable;

@@ -1,11 +1,80 @@
 {include file="header.html"}
 
-<h1>SignUp</h1>
+<script type="text/javascript">
+	$("document").ready(function(){
+		var status = 0;
+		$("#username").blur(function(){
+			$.getJSON("{spUrl c=user a=checkUsername}", {literal}{'username': $("#username").val()}{/literal}, function(json){
+				status += json.status;
+				$("#checkUsername").html(json.message);
+			});
+		});
 
-<form action="{spUrl('user', 'signup_post')}" method="POST">
-	<p>UserName:<input type="text" name="username" size="25" /><br /></p>
-	<p>Password:<input type="text" name="password" size="25" /><br /></p>
-	<p>E-Mail:<input type="email" name="email" size="25" /></p>
-	<input type="submit" value="SignUp" />
-</form>
+		$("#apwd").blur(function(){
+
+			if ($("#apwd").val() != ""){
+				$.getJSON("{spUrl c=user a=checkPwd}", {literal}{'password': $("#password").val(), 
+																'apwd':  $("#apwd").val()}{/literal}, function(pwdJSON){
+				status += pwdJSON.status;
+				$("#checkPwd").html(pwdJSON.message);
+				});	
+			} 
+		});
+
+		$("#email").blur(function(){
+			if ($("#email").val() == ""){
+				$("#checkEmail").html("<font color='red'>email is empty</font>");
+			}else{
+				$.getJSON("{spUrl c=user a=checkEmail}", 
+						{literal}{'email': $("#email").val()}{/literal}, 
+						function(emailJSON){
+					status += emailJSON.status;
+					$("#checkEmail").html(emailJSON.message);
+				});
+			}
+		});
+	});
+</script>
+
+<p></p>
+
+<div class="container">
+	<div class="well">
+		<h1 class="text-center">SignUp</h1>
+		<form action="{spUrl c=user a=signup_post}" method="POST" class="form-group">
+
+			<div class="input-group">
+				<span class="input-group-addon">@</span>
+				<input type="email" class="form-control" placeholder="input your email address" aria-describedby="basic-addon4" name="email" id="email"/>
+			</div>
+			<p id="checkEmail"></P>
+
+			<div class="input-group">
+				<span class="input-group-addon" id="base-addon2">#</span>
+				<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon2" name="password" id="password" size=25/>
+			</div>
+			<p></p>
+
+			<div class="input-group">
+				<span class="input-group-addon">>_<</span>
+				<input type="text" class="form-control" placeholder="Input password again" aria-describedby="basic-addon3" name="apwd" id="apwd" size=2500/>
+			</div>
+			<p id="checkPwd"></p>
+
+			<div class="input-group">
+				<span class="input-group-addon" id="base-addon1">^_^</span>
+				<input type="text" class="form-control" placeholder="Nickname" aria-describedby="basic-addon1" name="username" id="username"/>
+			</div>
+			<p id="checkUsername"></p>
+			
+			<div class="input-group">
+				 <!-- <input  type="submit" class="btn btn-default" value="SignUP" id="submit"/> -->
+				 <button id="submit" class="btn btn-default btn-lg disabled">SignUP</button>
+			</div>
+		</form>
+
+	</div>
+</div>
+
+
 {include file="footer.html"}

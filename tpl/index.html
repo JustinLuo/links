@@ -1,6 +1,7 @@
 {include file='header.html'}
 
-<div class="container-fluid">
+<p></p>
+<div class="container">
 	{if ($smarty.session.user != NULL)}
 		Welcome! {$smarty.session.user.username} | <a href="{spUrl('user', 'logout')}">Logout</a>
 	{else}
@@ -9,7 +10,7 @@
 
 
 
-	<p><a href="{spUrl('admin', 'add')}" class="btn btn-primary">Add Links</a></p>
+	<p><a href="{spUrl('admin', 'add')}" class="btn btn-default">Add Links</a></p>
 	<!-- <h1><a href="{spUrl('admin', 'add')}">Add Links</a></h1> -->
 	{foreach $links as $link}
 		<p class="lead"><a href="{$link['address']}" target="_black">{$link['title']}</a>

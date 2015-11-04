@@ -5,9 +5,65 @@ class admin extends spcontroller{
 		echo "Hello";
 	}
 
+	function addNum(){
+		$num = $this->spArgs('num');
+		echo $num + $num;
+	}
+
+	function checkTitle(){
+		error_reporting(0);
+		$title = $this->spArgs('title');
+		// echo json_encode($title);
+		$Link = spClass('Link');
+		if ($Link->find(['title'	=>	$title]) != FALSE){
+			$result = array(
+				'status' => 0,
+				'message' => "<font color='red'>title is not empty</font>",
+				);
+		} else {
+			$result = array(
+				'status' => 0,
+				'message' => "<font color='green'>Check ok!</font>",
+				);
+		}
+		echo json_encode($result);
+	}
+
+	function checkURL(){
+		$url = $this->spArgs("address");
+		if (preg_match("/^((http|ftp|https):\/\/)?([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}+[\/\w]{0,100}?$/", $url)){
+			// echo curlGetTitle($url);
+			$status = 0;
+			$message = curlGetTitle($url);
+			// echo "Yes";
+		} else {
+			$status = 1;
+			$message = "<font color='red'>URL 不正确</font>";
+		}
+		$result = array(
+			'status'	=>	$status,
+			'message'	=>	$message,
+			);
+		echo json_encode($result);
+	}
+
 	public function add(){
 		$this->display('admin/add.html');
 	}
+
+	public function add_ajax(){
+		$Link = spClass("Link");
+		// echo $this->spArgs("url");
+		if ($Link->addLink(['url'	=>	$this->spArgs("url"),
+							 'title'	=>	$this->spArgs('title'),
+							 'addTime'	=>	time(),
+							 ])){
+			echo json_encode(['msg'	=> 'true']);
+		}else {
+			echo json_encode(['msg'	=>	'false']);
+		}
+	}
+
 
 	public function add_post(){
 		dump($this->spArgs());

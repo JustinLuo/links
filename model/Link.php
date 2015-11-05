@@ -12,7 +12,7 @@ class Link extends spModel{
 	 * $array['title']
 	 */
 	public function addLink($array){
-		if ($this->find(['title'	=>	$array['title']]) == FALSE){
+		// if ($this->find(['title'	=>	$array['title']]) == FALSE){
 			if ($this->create(['address'	=>	$array['url'],
 								'title'		=>	$array['title'],
 								'addTime'	=>	$array['addTime'],
@@ -21,8 +21,9 @@ class Link extends spModel{
 			} else {
 				return false;
 			}
-		} else {
-			return false;
-		}
+		// }
+		// else {
+		// 	return false;
+		// }
 	}
 }

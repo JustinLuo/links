@@ -4,17 +4,59 @@
 	$("document").ready(function(){
 		$("#email").blur(function(){
 			$.getJSON("{spUrl c=user a=emailGetNickname}", {literal}{'email': $("#email").val()}{/literal}, function(emailJSON){
-				$("#checkUsername").html(emailJSON.message);
+				$("#checkEmail").html(emailJSON.message);
 			});
 		});
 
-		$("#submit").click(function(){
-			if ($("#password").val() == ''){
-				alert("NULL!");
-			}else{
-				alert("OK!");
-			}
+		$("#password").focus(function(){
+			$("#checkPwd").html('');
 		});
+		$("#email").focus(function(){
+			$("#checkEmail").html('');
+		});
+
+		$("#submit").click(function(){
+			var email = $("#email").val();
+			var pwd = $("#password").val();
+
+			if (email == ''){
+				$("#checkEmail").html("<font color='red'>邮箱不能为空</font>");
+				return false;
+			} else if(pwd == ''){
+				$("#checkPwd").html("<font color='red'>密码不能为空</font>");
+				return false;
+			} else {
+				$('form').submit();
+			}
+			// 
+			// var status = 0;
+			// if(pwd == ''){
+			// 	$("#checkPwd").html("<font color='red'>密码不能为空</font>");
+			// 	status += 1;
+			// 	// return false;
+			// }
+			// if (email == ''){
+			// 	$("#checkEmail").html("<font color='red'>邮箱不能为空</font>");
+			// 	status += 1;
+			// 	// return false;
+			// }
+
+
+			// if (status == 0){
+			// 	$('form').submit();
+			// } else {
+			// 	return false;
+			// }
+				
+
+			// if ($("#password").val() == ''){
+			// 	alert("NULL");
+			// 	return false;
+			// }else{
+			// 	$('form').submit();
+			// }
+		});	
+		
 	});
 
 
@@ -24,24 +66,25 @@
 <div class="container">
 	<div class="well">
 		<h1>SignIn</h1>
-		<!-- <form action="{spUrl('user', 'signin_post')}" method="POST" class="form-group"> -->
+		<form action="{spUrl('user', 'signin_post')}" method="POST" class="form-group" >
 		<!-- <form role="form"> -->
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">@</span>
 				<input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon1" name="email" size=10 id="email"/></p>
 			</div>
-			<span id="checkUsername"></span>
+			<span id="checkEmail"></span>
 			<br />
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon2">#</span>
 				<input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" name="password" size=10 id="password" /></p>
 			</div>
+			<span id="checkPwd"></span>
 
 			<div class="input-group">
-				<!-- <input type="submit" class="btn btn-primary" value="SignIn" /></p> -->
-				<button id="submit" class="btn btn-default">SignIN</button>
+				<input type="submit" class="btn btn-default" value="SignIn" id="submit" /></p>
+				<!-- <button id="submit" class="btn btn-default">SignIN</button> -->
 			</div>
-		<!-- </form> -->
+		</form>
 	</div>
 
 </div>

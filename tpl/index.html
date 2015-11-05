@@ -10,14 +10,44 @@
 
 
 
-	<p><a href="{spUrl('admin', 'add')}" class="btn btn-default">Add Links</a></p>
+	<p><a href="{spUrl('admin', 'add')}" class="btn btn-primary">Add Links</a></p>
 	<!-- <h1><a href="{spUrl('admin', 'add')}">Add Links</a></h1> -->
 	{foreach $links as $link}
 		<p class="lead"><a href="{$link['address']}" target="_black">{$link['title']}</a>
-			<blockquote><em>{$link['address']}</em></blockquote>
+			<small><em>{$link['address']}</em></small>
+			<!-- <blockquote><em>{$link['address']}</em></blockquote> -->
 		</p>
 		<hr />
+
 		<!-- <small><em>{$link['address']}</em></small></p> -->
 	{/foreach}
+	
+	{if $pager['current_page'] == $pager['first_page']}
+		Index
+	{else}
+		<a href="{spUrl c=main a=index page=$pager['first_page']}">Index</a>
+	{/if}
+	|
+	{foreach $pager['all_pages'] as $allPages}
+		{if $pager['current_page'] == $allPages}
+			{$allPages}
+		{else}
+			|<a href="{spUrl c=main a=index page=$allPages}">{$allPages}</a>
+		{/if}
+	{/foreach}
+
+	{if $pager['current_page'] == $pager['last_page']}
+		Last
+	{else}
+		<a href="{spUrl c=main a=index page=$pager['last_page']}">Last</a>
+	{/if}
+
 </div>
+
+
+
+	
+
+	
+
 {include file='footer.html'}

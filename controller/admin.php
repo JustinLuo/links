@@ -73,9 +73,9 @@ class admin extends spcontroller{
 		echo $title;
 		$address = $this->spArgs('address');
 		// echo $address;
-		// if (strpos($address, 'http://') == FALSE){
-		// 	$address = 'http://' . $address;
-		// }
+		if (strpos($address, 'http://') == FALSE){
+			$address = 'http://' . $address;
+		}
 		$Link = spClass('Link');
 		if ($Link->create(['title'	=>	$title,
 							'address'	=>	$address
